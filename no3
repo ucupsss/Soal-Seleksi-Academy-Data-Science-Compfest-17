@@ -2,12 +2,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# membaca data dari file CSV dan mengubah format tanggal
 df = pd.read_csv("train.csv")
 df['date'] = pd.to_datetime(df['date'])
 df['month'] = df['date'].dt.month
 df['weekday'] = df['date'].dt.weekday
 df['year'] = df['date'].dt.year
 
+# Menghitung rata-rata konsumsi listrik per bulan 
 plt.figure(figsize=(12,5))
 sns.lineplot(data=df, x='month', y='electricity_consumption', estimator='mean', ci=None)
 plt.title("Rata-rata Konsumsi Listrik per Bulan")
@@ -16,6 +18,7 @@ plt.xlabel("Month")
 plt.grid(True)
 plt.show()
 
+# menghitung rata-rata konsumsi listrik per hari
 plt.figure(figsize=(14, 5))
 sns.lineplot(data=df, x='date', y='electricity_consumption')
 plt.title("Time Series Konsumsi Listrik (harian)")
